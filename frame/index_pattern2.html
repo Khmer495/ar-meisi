@@ -88,41 +88,25 @@
       </a-text>
 
       <!--メール-->
-      <a-image id='ent_mail_icon' src='#img_mail' width='1' height=' 1' position='-2.5 1 1' rotation='-90 0 0' scale='0 0 0' opacity='0'
-        animation__start='property: scale; dur: 1; to: 0.8 0.8 0.8; easing: linear; startEvents: start;'
+      <a-image id='ent_mail_icon' src='#img_mail' width='1' height=' 1' position='-0.3 1 0.75' rotation='-90 0 0' scale='0 0 0' opacity='0'
+        animation__start='property: scale; dur: 1; to: 0.4 0.4 0.4; easing: linear; startEvents: start;'
         animation__end='property: opacity; dur: 1000; to: 1; easing: linear; startEvents: start;'>
       </a-image>
-      <a-text id='ent_mail_text_plane' position='-2.5 1.5 1' rotation='-90 0 0' scale='0 0 0' opacity='0'
-        geometry='primitive: plane; height: auto; width: auto' material='color: black'
-        value=null font='font/info-msdf.json' negate='false' align='center' color='black'
+      <a-text id='ent_mail_text' position='0.2 1 0.75' rotation='-90 0 0' scale='0 0 0' opacity='0'
+        value=null font='font/info-msdf.json' negate='false' align='left'
         animation__start='property: scale; dur: 1; to: 1 1 1; easing: linear; startEvents: start;'
-        animation__wait='property: scale; dur: 6000; startEvents: animationcomplete__start;'
-        animation__end='property: scale; dur: 1; to: 0 0 0; easing: linear; startEvents: animationcomplete__wait;'>
-        <a-text id='ent_mail_text' position='0 0 0.05' opacity='0'
-          value=null font='font/info-msdf.json' negate='false' align='center'
-          animation__start='property: opacity; dur: 1000; to: 1; easing: linear; startEvents: start;'
-          animation__wait='property: scale; dur: 4000; startEvents: animationcomplete__start;'
-          animation__end='property: opacity; dur: 1000; to: 0; easing: linear; startEvents: animationcomplete__wait;'>
-        </a-text>
+        animation__end='property: opacity; dur: 1000; to: 1; easing: linear; startEvents: start;'>
       </a-text>
 
       <!--電話-->
-      <a-image id='ent_tel_icon' src='#img_tel' width='1' height=' 1' position='-1.5 1 1' rotation='-90 0 0' scale='0 0 0' opacity='0'
-        animation__start='property: scale; dur: 1; to: 0.8 0.8 0.8; easing: linear; startEvents: start;'
+      <a-image id='ent_tel_icon' src='#img_tel' width='1' height=' 1' position='-0.3 1.25 ' rotation='-90 0 0' scale='0 0 0' opacity='0'
+        animation__start='property: scale; dur: 1; to: 0.4 0.4 0.4; easing: linear; startEvents: start;'
         animation__end='property: opacity; dur: 1000; to: 1; easing: linear; startEvents: start;'>
       </a-image>
-      <a-text id='ent_tel_text_plane' position='-1.5 1.5 1' rotation='-90 0 0' scale='0 0 0'
-        geometry='primitive: plane; height: auto; width: auto' material='color: black'
-        value=null font='font/info-msdf.json' negate='false' align='center' color='black'
+      <a-text id='ent_tel_text_plane' position='0.2 1 1.25' rotation='-90 0 0' scale='0 0 0'
+        value=null font='font/info-msdf.json' negate='false' align='left'
         animation__start='property: scale; dur: 1; to: 1 1 1; easing: linear; startEvents: start;'
-        animation__wait='property: scale; dur: 6000; startEvents: animationcomplete__start;'
-        animation__end='property: scale; dur: 1; to: 0 0 0; easing: linear; startEvents: animationcomplete__wait;'>
-        <a-text id='ent_tel_text' position='0 0 0.05' opacity='0'
-          value=null font='font/info-msdf.json' negate='false' align='center'
-          animation__start='property: opacity; dur: 1000; to: 1; easing: linear; startEvents: start;'
-          animation__wait='property: scale; dur: 4000; startEvents: animationcomplete__start;'
-          animation__end='property: opacity; dur: 1000; to: 0; easing: linear; startEvents: animationcomplete__wait;'>
-        </a-text>
+        animation__end='property: opacity; dur: 1000; to: 1; easing: linear; startEvents: start;'>
       </a-text>
 
       <!--twitter-->
@@ -162,7 +146,7 @@
 
   <script>
       //入力値
-      //intro
+      //name
       (function(){
           let txt_ja = '';
           let txt_en = '';
@@ -177,14 +161,12 @@
       //mail
       (function(){
           let txt = '';
-          document.getElementById('ent_mail_text_plane').setAttribute('value', txt);
           document.getElementById('ent_mail_text').setAttribute('value', txt);
           document.getElementById('copy_mail').setAttribute('value', txt);
       }());
       //tel
       (function(){
           let txt = '';
-          document.getElementById('ent_tel_text_plane').setAttribute('value', txt);
           document.getElementById('ent_tel_text').setAttribute('value', txt);
           document.getElementById('copy_tel').setAttribute('value', txt);
       }());
@@ -312,10 +294,12 @@
         // メール
         document.getElementById('ent_intro').addEventListener('animationcomplete__end', function () {
           document.getElementById('ent_mail_icon').emit('start');
+          document.getElementById('ent_mail_text').emit('start');
         });
         // 電話
         document.getElementById('ent_mail_icon').addEventListener('animationcomplete__end', function () {
           document.getElementById('ent_tel_icon').emit('start');
+          document.getElementById('ent_tel_text').emit('start');
         });
         // twitter
         document.getElementById('ent_tel_icon').addEventListener('animationcomplete__end', function () {
@@ -335,16 +319,6 @@
         });
 
         // クリックイベント
-        // ポップアップ
-        document.getElementById('ent_mail_icon').addEventListener('click', function () {
-          document.getElementById('ent_mail_text_plane').emit('start');
-          document.getElementById('ent_mail_text').emit('start');
-        });
-        document.getElementById('ent_tel_icon').addEventListener('click', function () {
-          document.getElementById('ent_tel_text_plane').emit('start');
-          document.getElementById('ent_tel_text').emit('start');
-        });
-
         // コピー
         document.getElementById('ent_mail_icon').addEventListener('click', function () {
           let txt = document.getElementById('copy_mail');
