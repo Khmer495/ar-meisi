@@ -116,28 +116,45 @@
       </a-entity>
 
       <!--twitter-->
-      <a-image id='ent_twitter' src='#img_twitter' width='1' height=' 1' position='-2.4 1 1' rotation='-90 0 0' scale='0 0 0' opacity='0'
-        animation__start='property: scale; dur: 1; to: 0.8 0.8 0.8; easing: linear; startEvents: start;'
-        animation__end='property: opacity; dur: 1000; to: 1; easing: linear; startEvents: start;'>
-      </a-image>
+      <a-entity rotation='-90 0 0'>
+        <a-image id='ent_twitter' src='#img_twitter' width='1' height=' 1' position='-2.4 -1 1' scale='0 0 0' opacity='0'
+          animation__start='property: scale; dur: 1; to: 0.8 0.8 0.8; easing: linear; startEvents: start;'
+          animation__end='property: opacity; dur: 1000; to: 1; easing: linear; startEvents: start;'
+          animation__spin_wait_loop='property: position; dur: 7000; startEvents: start; loop: true;'
+          animation__spin_wait='property: scale; dur: 200; startEvents: spin;'
+          animation__spin='property: rotation; dur: 1000; from: 0 0 0; to: 0 360 0; easing: linear; startEvents: start, animationcomplete__spin_wait;'>
+        </a-image>
+      </a-entity>
 
       <!--facebook-->
-      <a-image id='ent_facebook' src='#img_facebook' width='1' height=' 1' position='-1.2 1 1' rotation='-90 0 0' scale='0 0 0' opacity='0'
-        animation__start='property: scale; dur: 1; to: 0.8 0.8 0.8; easing: linear; startEvents: start;'
-        animation__end='property: opacity; dur: 1000; to: 1; easing: linear; startEvents: start;'>
-      </a-image>
+      <a-entity rotation='-90 0 0'>
+        <a-image id='ent_facebook' src='#img_facebook' width='1' height=' 1' position='-1.2 -1 1' scale='0 0 0' opacity='0'
+          animation__start='property: scale; dur: 1; to: 0.8 0.8 0.8; easing: linear; startEvents: start;'
+          animation__end='property: opacity; dur: 1000; to: 1; easing: linear; startEvents: start;'
+          animation__spin_wait='property: scale; dur: 200; startEvents: spin;'
+          animation__spin='property: rotation; dur: 1000; from: 0 0 0; to: 0 360 0; easing: linear; startEvents: start, animationcomplete__spin_wait;'>
+        </a-image>
+      </a-entity>
 
       <!--instagram-->
-      <a-image id='ent_instagram' src='#img_instagram' width='1' height=' 1' position='-1.2 1 1' rotation='-90 0 0' scale='0 0 0' opacity='0'
-        animation__start='property: scale; dur: 1; to: 0.8 0.8 0.8; easing: linear; startEvents: start;'
-        animation__end='property: opacity; dur: 1000; to: 1; easing: linear; startEvents: start;'>
-      </a-image>
+      <a-entity rotation='-90 0 0'>
+        <a-image id='ent_instagram' src='#img_instagram' width='1' height=' 1' position='-1.2 -1 1' scale='0 0 0' opacity='0'
+          animation__start='property: scale; dur: 1; to: 0.8 0.8 0.8; easing: linear; startEvents: start;'
+          animation__end='property: opacity; dur: 1000; to: 1; easing: linear; startEvents: start;'
+          animation__spin_wait='property: scale; dur: 200; startEvents: spin;'
+          animation__spin='property: rotation; dur: 1000; from: 0 0 0; to: 0 360 0; easing: linear; startEvents: start, animationcomplete__spin_wait;'>
+        </a-image>
+      </a-entity>
 
       <!--github-->
-      <a-image id='ent_facebook' src='#img_github' width='1' height=' 1' position='-1.2 1 1' rotation='-90 0 0' scale='0 0 0' opacity='0'
-        animation__start='property: scale; dur: 1; to: 0.8 0.8 0.8; easing: linear; startEvents: start;'
-        animation__end='property: opacity; dur: 1000; to: 1; easing: linear; startEvents: start;'>
-      </a-image>
+      <a-entity rotation='-90 0 0'>
+        <a-image id='ent_facebook' src='#img_github' width='1' height=' 1' position='-1.2 -1 1' scale='0 0 0' opacity='0'
+          animation__start='property: scale; dur: 1; to: 0.8 0.8 0.8; easing: linear; startEvents: start;'
+          animation__end='property: opacity; dur: 1000; to: 1; easing: linear; startEvents: start;'
+          animation__spin_wait='property: scale; dur: 200; startEvents: spin;'
+          animation__spin='property: rotation; dur: 1000; from: 0 0 0; to: 0 360 0; easing: linear; startEvents: start, animationcomplete__spin_wait;'>
+        </a-image>
+      </a-entity>
     </a-marker>
 
     <!-- AR用のカメラを置く -->
@@ -323,6 +340,29 @@
         document.getElementById('ent_instagram').addEventListener('animationcomplete__end', function () {
           document.getElementById('ent_github').emit('start');
         });
+
+        // 一定間隔でアイコンがスピン
+        // twitter
+        document.getElementById('ent_twitter').addEventListener('animationcomplete__spin_wait_main', function () {
+          document.getElementById('ent_twitter').emit('spin');
+        });
+        // facebook
+        document.getElementById('ent_twitter').addEventListener('animationcomplete__spin_wait', function () {
+          document.getElementById('ent_facebook').emit('spin');
+        });
+        // instagram
+        /*
+        document.getElementById('ent_facebook').addEventListener('animationcomplete__spin_wait', function () {
+          document.getElementById('ent_instagram').emit('spin');
+        });
+        */
+        // github
+        /*
+        document.getElementById('ent_instagram').addEventListener('animationcomplete__spin_wait', function () {
+          document.getElementById('ent_github').emit('spin');
+        });
+        */
+
 
         // クリックイベント
         // コピー
