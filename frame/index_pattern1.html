@@ -90,7 +90,10 @@
       <!--メール-->
       <a-image id='ent_mail_icon' src='#img_mail' width='1' height=' 1' position='-2.5 1 1' rotation='-90 0 0' scale='0 0 0' opacity='0'
         animation__start='property: scale; dur: 1; to: 0.8 0.8 0.8; easing: linear; startEvents: start;'
-        animation__end='property: opacity; dur: 1000; to: 1; easing: linear; startEvents: start;'>
+        animation__end='property: opacity; dur: 1000; to: 1; easing: linear; startEvents: start;'
+        animation__spin_wait_loop='property: position; dur: 7000; startEvents: start; loop: true;'
+        animation__spin_wait='property: scale; dur: 200; startEvents: spin;'
+        animation__spin='property: rotation; dur: 1000; from: 0 0 0; to: 0 360 0; easing: linear; startEvents: start, animationcomplete__spin_wait;'>
       </a-image>
       <a-text id='ent_mail_text_plane' position='-2.5 1.5 1' rotation='-90 0 0' scale='0 0 0' opacity='0'
         geometry='primitive: plane; height: auto; width: auto' material='color: black'
@@ -109,7 +112,9 @@
       <!--電話-->
       <a-image id='ent_tel_icon' src='#img_tel' width='1' height=' 1' position='-1.5 1 1' rotation='-90 0 0' scale='0 0 0' opacity='0'
         animation__start='property: scale; dur: 1; to: 0.8 0.8 0.8; easing: linear; startEvents: start;'
-        animation__end='property: opacity; dur: 1000; to: 1; easing: linear; startEvents: start;'>
+        animation__end='property: opacity; dur: 1000; to: 1; easing: linear; startEvents: start;'
+        animation__spin_wait='property: scale; dur: 200; startEvents: spin;'
+        animation__spin='property: rotation; dur: 1000; from: 0 0 0; to: 0 360 0; easing: linear; startEvents: start, animationcomplete__spin_wait;'>
       </a-image>
       <a-text id='ent_tel_text_plane' position='-1.5 1.5 1' rotation='-90 0 0' scale='0 0 0'
         geometry='primitive: plane; height: auto; width: auto' material='color: black'
@@ -128,25 +133,33 @@
       <!--twitter-->
       <a-image id='ent_twitter' src='#img_twitter' width='1' height=' 1' position='-0.5 1 1' rotation='-90 0 0' scale='0 0 0' opacity='0'
         animation__start='property: scale; dur: 1; to: 0.8 0.8 0.8; easing: linear; startEvents: start;'
-        animation__end='property: opacity; dur: 1000; to: 1; easing: linear; startEvents: start;'>
+        animation__end='property: opacity; dur: 1000; to: 1; easing: linear; startEvents: start;'
+        animation__spin_wait='property: scale; dur: 200; startEvents: spin;'
+        animation__spin='property: rotation; dur: 1000; from: 0 0 0; to: 0 360 0; easing: linear; startEvents: start, animationcomplete__spin_wait;'>
       </a-image>
 
       <!--facebook-->
       <a-image id='ent_facebook' src='#img_facebook' width='1' height=' 1' position='0.5 1 1' rotation='-90 0 0' scale='0 0 0' opacity='0'
         animation__start='property: scale; dur: 1; to: 0.8 0.8 0.8; easing: linear; startEvents: start;'
-        animation__end='property: opacity; dur: 1000; to: 1; easing: linear; startEvents: start;'>
+        animation__end='property: opacity; dur: 1000; to: 1; easing: linear; startEvents: start;'
+        animation__spin_wait='property: scale; dur: 200; startEvents: spin;'
+        animation__spin='property: rotation; dur: 1000; from: 0 0 0; to: 0 360 0; easing: linear; startEvents: start, animationcomplete__spin_wait;'>
       </a-image>
 
       <!--instagram-->
       <a-image id='ent_instagram' src='#img_instagram' width='1' height=' 1' position='1.5 1 1' rotation='-90 0 0' scale='0 0 0' opacity='0'
         animation__start='property: scale; dur: 1; to: 0.8 0.8 0.8; easing: linear; startEvents: start;'
-        animation__end='property: opacity; dur: 1000; to: 1; easing: linear; startEvents: start;'>
+        animation__end='property: opacity; dur: 1000; to: 1; easing: linear; startEvents: start;'
+        animation__spin_wait='property: scale; dur: 200; startEvents: spin;'
+        animation__spin='property: rotation; dur: 1000; from: 0 0 0; to: 0 360 0; easing: linear; startEvents: start, animationcomplete__spin_wait;'>
       </a-image>
 
       <!--github-->
       <a-image id='ent_github' src='#img_github' width='1' height=' 1' position='2.5 1 1' rotation='-90 0 0' scale='0 0 0' opacity='0'
         animation__start='property: scale; dur: 1; to: 0.8 0.8 0.8; easing: linear; startEvents: start;'
-        animation__end='property: opacity; dur: 1000; to: 1; easing: linear; startEvents: start;'>
+        animation__end='property: opacity; dur: 1000; to: 1; easing: linear; startEvents: start;'
+        animation__spin_wait='property: scale; dur: 200; startEvents: spin;'
+        animation__spin='property: rotation; dur: 1000; from: 0 0 0; to: 0 360 0; easing: linear; startEvents: start, animationcomplete__spin_wait;'>
       </a-image>
     </a-marker>
 
@@ -332,6 +345,32 @@
         // github
         document.getElementById('ent_instagram').addEventListener('animationcomplete__end', function () {
           document.getElementById('ent_github').emit('start');
+        });
+
+        // 一定間隔でアイコンがスピン
+        // twitter
+        document.getElementById('ent_mail_icon').addEventListener('animationcomplete__spin_wait_loop', function () {
+          document.getElementById('ent_tel_icon').emit('spin');
+        });
+        // twitter
+        document.getElementById('ent_tel_icon').addEventListener('animationcomplete__spin_wait', function () {
+          document.getElementById('ent_twitter').emit('spin');
+        });
+        // twitter
+        document.getElementById('ent_twitter').addEventListener('animationcomplete__spin_wait', function () {
+          document.getElementById('ent_twitter').emit('spin');
+        });
+        // facebook
+        document.getElementById('ent_twitter').addEventListener('animationcomplete__spin_wait', function () {
+          document.getElementById('ent_facebook').emit('spin');
+        });
+        // instagram
+        document.getElementById('ent_facebook').addEventListener('animationcomplete__spin_wait', function () {
+          document.getElementById('ent_instagram').emit('spin');
+        });
+        // github
+        document.getElementById('ent_instagram').addEventListener('animationcomplete__spin_wait', function () {
+          document.getElementById('ent_github').emit('spin');
         });
 
         // クリックイベント
